@@ -10,20 +10,13 @@ import java.io.Serializable;
  * Created by My PC on 2017-01-05.
  */
 public class DataSearch implements Serializable{
+    private int id;
     private int albumid;
     private String albumPath;
     private String title;
     private String artist;
     private String path;
     private String duration;
-
-    public void DataSearch(int albumid, String title, String artist, String path, String duration){
-        this.albumid = albumid;
-        this.title = title;
-        this.artist = artist;
-        this.path = path;
-        this.duration = duration;
-    }
 
     public void setAlbumId(int albumid){
         this.albumid = albumid;
@@ -71,5 +64,13 @@ public class DataSearch implements Serializable{
 
     public void setAlbumPath(String albumPath) {
         this.albumPath = albumPath;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

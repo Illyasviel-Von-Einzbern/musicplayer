@@ -65,8 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_sdcard.setOnClickListener(this);
         btn_particular.setOnClickListener(this);*/
 //        btn_goto_play.setOnClickListener(this);
-        listview.setOnItemClickListener((adapterView, view, i, l) -> {
+        listview.setOnItemClickListener((adapterView, view, p, id) -> {
             Intent intent = new Intent(MainActivity.this , PlayMusic.class);
+            intent.putExtra("id", id);
             startActivity(intent);
         });
 
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void getMusicList() {
         arrList = new ArrayList<>();
         String[] projection = {
+                MediaStore.Audio.Media._ID,
                 MediaStore.Audio.Media.ALBUM_ID,
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST
@@ -95,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Null = null;
                 dataSearch.setAlbumPath(Null);
             }
+            dataSearch.setId(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
             dataSearch.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
             dataSearch.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
             arrList.add(dataSearch);

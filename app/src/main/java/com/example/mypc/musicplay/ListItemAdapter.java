@@ -91,7 +91,7 @@ public class ListItemAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return getItem(i).getId();
     }
 
     @Override

@@ -72,7 +72,7 @@ public class PlayMusic extends Activity implements View.OnClickListener{
         music = new MediaPlayer();
 
         try{
-            String art = musicManager.getMusicAlbumArt(getTestMusicId());
+            String art = musicManager.getMusicAlbumArt(Integer.toString(getIntent().getIntExtra("id", 0)));
             if(art == null){
 
                 imgview.setImageResource(R.drawable.blue_music_cd_icon);
@@ -197,14 +197,6 @@ public class PlayMusic extends Activity implements View.OnClickListener{
                 }
                 break;
         }
-    }
-
-    public String getTestMusicId() {
-        Cursor cur = managedQuery(Media.EXTERNAL_CONTENT_URI, null, null, null, null);
-        if (cur.moveToFirst()) {
-            return cur.getString(cur.getColumnIndex(Media._ID));
-        }
-        return null;
     }
 
     public String getTestMusicPath() {
