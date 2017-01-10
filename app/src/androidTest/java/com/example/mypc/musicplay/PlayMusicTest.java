@@ -20,7 +20,7 @@ public class PlayMusicTest extends ActivityInstrumentationTestCase2<PlayMusic> {
 	}
 
 	public void test() {
-		String art = activity.getMusicAlbumArt(getTestMusicId());
+		String art = activity.musicManager.getMusicAlbumArt(getTestMusicId());
 		assertNotNull(art);
 		Bitmap bitmap = BitmapFactory.decodeFile(art);
 		assertEquals(bitmap, "test");

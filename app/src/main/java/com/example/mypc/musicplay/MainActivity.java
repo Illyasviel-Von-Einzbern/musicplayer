@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ListView listview;
     ArrayList<DataSearch> arrList;
     ListItemAdapter adapter;
+    private MusicManager musicManager;
 
 
     @Override
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        musicManager = new MusicManager(this);
 
 /*
         btn_all = (Button)findViewById(R.id.search_all_in_phone);
@@ -82,7 +84,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         while(cursor.moveToNext()){
             DataSearch dataSearch = new DataSearch();
-            dataSearch.setAlbumId(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)));
+            int albumId = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+            dataSearch.setAlbumId(albumId);
+            dataSearch.setPath(musicManager.getAlbumArt(Integer.toString(albumId)));
             dataSearch.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
             dataSearch.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
             arrList.add(dataSearch);

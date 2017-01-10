@@ -36,6 +36,7 @@ public class PlayMusic extends Activity implements View.OnClickListener{
     TextView show_path;
     TextView music_now;
     TextView music_total;
+    MusicManager musicManager;
 
     @Override
     protected void onDestroy() {
@@ -62,7 +63,7 @@ public class PlayMusic extends Activity implements View.OnClickListener{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_sound);
-
+        musicManager = new MusicManager(this);
         imgview = (ImageView)findViewById(R.id.album_art);
 
         show_path = (TextView)findViewById(R.id.show_path);
@@ -71,7 +72,7 @@ public class PlayMusic extends Activity implements View.OnClickListener{
         music = new MediaPlayer();
 
         try{
-            String art = getMusicAlbumArt(getTestMusicId());
+            String art = musicManager.getMusicAlbumArt(getTestMusicId());
             if(art == null){
 
                 imgview.setImageResource(R.drawable.blue_music_cd_icon);
@@ -196,27 +197,6 @@ public class PlayMusic extends Activity implements View.OnClickListener{
                 }
                 break;
         }
-    }
-
-    private String getAlbumArt(String albumId) {
-        Cursor cursor = managedQuery(Albums.EXTERNAL_CONTENT_URI,
-                new String[]{Albums._ID, Albums.ALBUM_ART},
-                Albums._ID + "=?", new String[]{albumId}, null);
-
-        if (cursor.moveToFirst()) {
-            return cursor.getString(cursor.getColumnIndex(Albums.ALBUM_ART));
-        }
-        return null;
-    }
-
-    public String getMusicAlbumArt(String musicId) {
-        Cursor cur = managedQuery(Media.EXTERNAL_CONTENT_URI,
-                null, Media._ID + "=?", new String[]{musicId}, null);
-        if (cur.moveToFirst()) {
-            String albumId = cur.getString(cur.getColumnIndex(Media.ALBUM_ID));
-            return getAlbumArt(albumId);
-        }
-        return null;
     }
 
     public String getTestMusicId() {
