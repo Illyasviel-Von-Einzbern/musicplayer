@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="모든 파일에서 검색"
+        android:id="@+id/search_all_in_phone"/>
+    <item
+        android:title="기본 Music폴더에서 검색"
+        android:id="@+id/search_in_music_directory"/>
+    <item
+        android:title="sd카드에서 검색"
+        android:id="@+id/search_all_in_sdcard"/>
+    <item
+        android:title="특정 파일에서 검색"
+        android:id="@+id/search_in_particular_directory"/>
+
+</menu>
