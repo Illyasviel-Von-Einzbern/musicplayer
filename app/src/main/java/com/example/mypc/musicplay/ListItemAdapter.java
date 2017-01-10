@@ -46,8 +46,8 @@ public class ListItemAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         if(view == null){
             view = inflater.inflate(R.layout.list_item, viewGroup, false);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            view.setLayoutParams(layoutParams);
+//            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//            view.setLayoutParams(layoutParams);
         }
         DataSearch dataSearch = list.get(position);
         ImageView imageView = (ImageView)view.findViewById(R.id.pre_album);
@@ -59,9 +59,7 @@ public class ListItemAdapter extends BaseAdapter {
 
         TextView artist = (TextView)view.findViewById(R.id.pre_artist);
         artist.setText(dataSearch.getArtist());
-
-
-        return null;
+        return view;
     }
 
     private static final BitmapFactory.Options options = new BitmapFactory.Options();
