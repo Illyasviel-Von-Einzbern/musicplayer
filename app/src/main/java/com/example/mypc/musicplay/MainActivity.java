@@ -27,13 +27,13 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-/*    Button btn_all;
-    Button btn_music;
-    Button btn_sdcard;
-    Button btn_particular;
-    Button btn_goto_play;*/
+    /*    Button btn_all;
+        Button btn_music;
+        Button btn_sdcard;
+        Button btn_particular;
+        Button btn_goto_play;*/
 //    Menu menu;
     ListView listview;
     ArrayList<DataSearch> arrList;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_sdcard = (Button)findViewById(R.id.search_all_in_sdcard);
         btn_particular = (Button)findViewById(R.id.search_in_particular_directory);*/
 //        btn_goto_play = (Button)findViewById(R.id.goto_play);
-        listview = (ListView)findViewById(R.id.listview);
+        listview = (ListView) findViewById(R.id.listview);
 
         getMusicList();
         adapter = new ListItemAdapter(this, arrList);
@@ -64,14 +64,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_music.setOnClickListener(this);
         btn_sdcard.setOnClickListener(this);
         btn_particular.setOnClickListener(this);*/
-/*        btn_goto_play.setOnClickListener(this);
+//        btn_goto_play.setOnClickListener(this);
         listview.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent = new Intent(MainActivity.this , PlayMusic.class);
             startActivity(intent);
         });
-*/
+
     }
-    public  void getMusicList(){
+
+    public void getMusicList() {
         arrList = new ArrayList<>();
         String[] projection = {
                 MediaStore.Audio.Media.ALBUM_ID,
@@ -82,46 +83,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 projection, null, null, null);
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             DataSearch dataSearch = new DataSearch();
             int albumId = cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
             dataSearch.setAlbumId(albumId);
-            dataSearch.setPath(musicManager.getAlbumArt(Integer.toString(albumId)));
+            if (albumId > 0 && Integer.toString(albumId) != null) {
+                dataSearch.setAlbumPath(musicManager.getAlbumArt(Integer.toString(albumId)));
+            }
+            else{
+                String Null;
+                Null = null;
+                dataSearch.setAlbumPath(Null);
+            }
             dataSearch.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
             dataSearch.setArtist(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST)));
             arrList.add(dataSearch);
         }
         cursor.close();
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.search_all_in_phone :
 
-                break;
-            case R.id.search_all_in_sdcard :
+    /*
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch(item.getItemId()){
+                case R.id.search_all_in_phone :
 
-                break;
-            case R.id.search_in_music_directory :
+                    break;
+                case R.id.search_all_in_sdcard :
 
-                break;
-            case R.id.search_in_particular_directory :
+                    break;
+                case R.id.search_in_music_directory :
 
-                break;
+                    break;
+                case R.id.search_in_particular_directory :
+
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
-    }
-*//*
+    *//*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 */
-   @Override
+    @Override
     public void onClick(View view) {
-        switch(view.getId()){/*
+        switch (view.getId()) {/*
             case R.id.search_all_in_phone:
 
                 break;

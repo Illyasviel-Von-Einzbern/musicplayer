@@ -19,7 +19,7 @@ public class MusicManager {
                 new String[]{MediaStore.Audio.Albums._ID, MediaStore.Audio.Albums.ALBUM_ART},
                 MediaStore.Audio.Albums._ID + "=?", new String[]{albumId}, null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             return cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART));
         }
         return null;

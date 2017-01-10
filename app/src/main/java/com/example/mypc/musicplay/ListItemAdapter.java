@@ -43,13 +43,15 @@ public class ListItemAdapter extends BaseAdapter {
         }
         DataSearch dataSearch = list.get(position);
         ImageView imageView = (ImageView) view.findViewById(R.id.pre_album);
-        Bitmap AlbumImage = getAlbumArt(dataSearch.getPath(), 170);
-        if(AlbumImage == null){
-            imageView.setImageResource(R.drawable.blue_music_cd_icon);
+        Bitmap AlbumImage = null;
+        if(dataSearch.getAlbumPath() == null){
+
+            AlbumImage = getAlbumArt(Integer.toString(R.drawable.blue_music_cd_icon),80);
         }
         else {
-            imageView.setImageBitmap(AlbumImage);
+            AlbumImage = getAlbumArt(dataSearch.getAlbumPath(), 80);
         }
+        imageView.setImageBitmap(AlbumImage);
 
         TextView title = (TextView) view.findViewById(R.id.pre_title);
         title.setText(dataSearch.getTitle());
@@ -60,6 +62,9 @@ public class ListItemAdapter extends BaseAdapter {
     }
 
     private static Bitmap getAlbumArt(String albumPath, int MAX_IMAGE_SIZE) {
+        if (albumPath == null) {
+            return null;
+        }
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = true;

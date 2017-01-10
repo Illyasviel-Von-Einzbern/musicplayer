@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 public class DataSearch implements Serializable{
     private int albumid;
+    private String albumPath;
     private String title;
     private String artist;
     private String path;
@@ -62,5 +63,13 @@ public class DataSearch implements Serializable{
 
     public String getDuration(){
         return duration;
+    }
+
+    public String getAlbumPath() {
+        return albumPath;
+    }
+
+    public void setAlbumPath(String albumPath) {
+        this.albumPath = albumPath;
     }
 }
