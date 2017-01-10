@@ -44,7 +44,12 @@ public class ListItemAdapter extends BaseAdapter {
         DataSearch dataSearch = list.get(position);
         ImageView imageView = (ImageView) view.findViewById(R.id.pre_album);
         Bitmap AlbumImage = getAlbumArt(dataSearch.getPath(), 170);
-        imageView.setImageBitmap(AlbumImage);
+        if(AlbumImage == null){
+            imageView.setImageResource(R.drawable.blue_music_cd_icon);
+        }
+        else {
+            imageView.setImageBitmap(AlbumImage);
+        }
 
         TextView title = (TextView) view.findViewById(R.id.pre_title);
         title.setText(dataSearch.getTitle());
