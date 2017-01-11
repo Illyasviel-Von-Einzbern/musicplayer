@@ -3,9 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
+        android:layout_below="@id/show_path"
+        android:layout_alignBaseline="@id/asdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/asdf"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/show_path"
+        android:layout_height="wrap_content">
+        <SeekBar
+            android:id="@+id/change_sound"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
         android:id="@+id/show_path"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/album_art"
         android:layout_width="250dp"
@@ -47,8 +64,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+        <Button
+            android:id="@+id/next_music"
+            android:layout_weight="1"
+            android:text=">>"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 <LinearLayout
+    android:id="@+id/ii"
     android:layout_width="match_parent"
     android:layout_height="30dp"
     android:layout_above="@+id/linearLayout"

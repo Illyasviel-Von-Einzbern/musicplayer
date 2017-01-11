@@ -20,6 +20,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,10 +66,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_sdcard.setOnClickListener(this);
         btn_particular.setOnClickListener(this);*/
 //        btn_goto_play.setOnClickListener(this);
-        listview.setOnItemClickListener((adapterView, view, p, id) -> {
-            Intent intent = new Intent(MainActivity.this , PlayMusic.class);
-            intent.putExtra("id", id);
-            startActivity(intent);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int p, long id) {
+                Intent intent = new Intent(MainActivity.this, PlayMusic.class);
+                intent.putExtra("id", id);
+                MainActivity.this.startActivity(intent);
+            }
         });
 
     }
